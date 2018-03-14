@@ -1,14 +1,16 @@
 {
   "name": "agora-diagnostics",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node app"
   },
   "description": "AgoraDiagnostics",
   "author": {
-    "name": "kevin"
+    "name": "Kevin Heath High",
+    "email": "kevin@hobbitsoft.net"
   },
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.15.0",
     "cookie-parser": "^1.4.0",

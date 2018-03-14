@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Agora Diagnostics</title>
+</head>
+<body>
+    <script src="js/AgoraRTCSDK-2.1.0.js"></script>
+    <script src="js/AgoraSig-1.2.0.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="js/index.js"></script>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <div class="container mt-3"><h1>Agora Diagnostics</h1></div>
+            </div>
+            <div class="col-sm">
+                <div class="container mt-1">
+                    <p id="system_check">Browser Check:</p>
+                </div>
+                <div class="input-group">
+                    <div class="input-group input-group-sm mb-1"></div>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text border-0">Interop</span>
+                    </div>
+                    <select class="custom-select border-0" id="interop_mode" data-toggle="tooltip" data-placement="left" title="Select Interop Mode">
+                        <option selected value="none">none</option>
+                        <option value="interop">interop</option>
+                        <option value="h264_interop">h264_interop</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button id="btn_create_client" class="btn btn-primary border-0" type="button">Create Client</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+    </div>
+    <div class="container">
+        <div class="input-group mb-2">
+        </div>
+        <div class="input-group mb-2">
+            <input id="app_id" type="password" class="form-control input-group-text form-control-sm border-0" placeholder="App ID" data-toggle="tooltip" data-placement="left" title="Input App ID from agora.io" />
+            <div class="input-group-append">
+                <button id="btn_init" class="btn btn-primary border-0" type="button">Initialize Client</button>
+            </div>
+        </div>
+        <div class="input-group mb-2">
+            <input id="app_cert" type="password" class="form-control input-group-text form-control-sm border-0" placeholder="App Certificate" data-toggle="tooltip" data-placement="left" title="Certificate for App" />
+        </div>
+        <div class="input-group mb-2">
+            <input id="channel_name" type="text" class="form-control input-group-text form-control-sm border-0" placeholder="Channel Name" data-toggle="tooltip" data-placement="left" title="Channel to Join" />
+            <div class="input-group-append">
+                <button id="btn_join" class="btn btn-primary" type="button">Join</button>
+            </div>
+        </div>
+        <div class="input-group mb-2">
+            <input id="user_name" type="text" class="form-control input-group-text form-control-sm border-0" placeholder="User Name" data-toggle="tooltip" data-placement="left" title="Username for Channel" />
+            <div class="input-group-append">
+                <button id="btn_add" class="btn btn-primary border-0" type="button">Add User</button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div id="devices_table" class="col-sm">
+                    <h5>Devices</h5>
+                    <table id="devices" class="table table-hover table-sm">
+                        <thead><tr><th scope="col">ID</th><th scope="col">Label</th><th scope="col">Kind</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div id="users_table" class="col-sm">
+                    <h5>Remote Users</h5>
+                    <table id="users" class="table table-hover table-sm">
+                        <thead><tr><th scope="col">User ID</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="container" id="videos">
+                <div class="row">
+                    <div class="col-sm">
+                        <p id="local_uid">Local Media</p>
+                        <button id="btn_create_local_media" class="btn-sm btn-primary border-0" type="button">Create</button>
+                        <button id="btn_init_local_stream" class="btn-sm btn-primary border-0" type="button">Init</button>
+                        <button id="btn_publish_local_stream" class="btn-sm btn-primary border-0" type="button">Publish</button>
+                        <button id="btn_play_local_media" class="btn-sm btn-primary border-0" type="button">Play</button>
+                        <button id="btn_local_audio_mute" class="btn-sm btn-primary border-0" type="button">Mute Audio</button>
+                        <button id="btn_local_video_mute" class="btn-sm btn-primary border-0" type="button">Mute Video</button>
+                        <div id="local-media" style="width:480px;height:360px"></div>
+                    </div>
+                    <div class="col-sm">
+                        <p id="remote_uid">Remote Media</p>
+                        <button id="btn_subscribe_remote_stream" class="btn-sm btn-primary border-0" type="button">Subscribe</button>
+                        <button id="btn_play_remote_media" class="btn-sm btn-primary border-0" type="button">Play</button>
+                        <button id="btn_remote_audio_mute" class="btn-sm btn-secondary border-0" type="button">Mute Audio</button>
+                        <button id="btn_remote_vido_mute" class="btn-sm btn-secondary border-0" type="button">Mute Video</button>
+                        <div id="remote-media" style="width:480px;height:360px" "></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <button id="btn_local_stats" class="btn-sm btn-primary border-0" type="button">Local Stats</button>
+                        <div class="jumbotron" id="local_stats"></div>
+                    </div>
+                    <div class="col-sm">
+                        <button id="btn_remote_stats" class="btn-sm btn-primary border-0" type="button">Remote Stats</button>
+                        <div class="jumbotron" id="remote_stats"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
