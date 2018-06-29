@@ -5,6 +5,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <Name>AgoraDiagnostics</Name>
     <RootNamespace>AgoraDiagnostics</RootNamespace>
+    <LastActiveSolutionConfig>Debug|Any CPU</LastActiveSolutionConfig>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -30,8 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
-    <Compile Include="public\js\AgoraRTCSDK-2.1.0.js" />
-    <Compile Include="public\js\AgoraSig-1.2.0.js" />
+    <Compile Include="public\js\AgoraRTCSDK-2.1.1.js" />
     <Compile Include="public\js\index.js">
       <SubType>Code</SubType>
     </Compile>
