@@ -28,4 +28,4 @@ itself in relation to the actual Agora Diagnostics tool.  The the contents of th
 web server and the app will run just fine.
 
 WebRTC compatable browsers do not allow media to be invoked on non-secure connections except for `localhost`.   To run
-this app outside of 
+this app outside of you local developement envrionment will require security certificates setup on your weberver/domain.
